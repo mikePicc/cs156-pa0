@@ -11,7 +11,10 @@ def is_in(element: Any, list: list) -> bool:
     Returns:
         bool: true if the element is in the list; otherwise, false
     """
-    pass
+     if element in list:
+        return True
+    else:
+        return False
 
 class Edge:
     """Edge object
@@ -38,7 +41,10 @@ class Edge:
         Returns:
             bool: if n1 and n2 match, True. 
         """
-        pass
+         if self.n1 ==  edge and self.n2 == edge:
+            return True
+        else:
+            return False 
     
     def __repr__(self) -> str:
         """specifies representation of an edge
@@ -46,7 +52,7 @@ class Edge:
         Returns:
             str: show n1, n2 and the cost (you can decide a format)
         """
-        pass
+        return "n1:", self.n1, ", n2:", self.n2, ", cost:", self.edge_cost
 
 class Graph:
     """Graph object that maintains node and edge lists
@@ -70,7 +76,19 @@ class Graph:
         Raises:
             ValueError: If an edge added to the nodes that are already connected by another edge, raise this error and do not add the new edge.
         """
-        pass
+        if n1 not in self.nodes:
+            self.nodes.append(n1)
+        if n2 not in self.nodes:
+            self.nodes.append(n2)
+        edge = Edge(self.n1, self.n2, self.edge_cost)
+
+        try:
+            if edge not in self.edges:
+                self.edges.append(edge)
+                
+        except ValueError:
+            if edge in self.edges:
+                print(f'This edge is already added to the list.')
 
     def dirNeighbors(self, node: int) -> list[int]:
         """returns neighbors considering the direction of edges. 
@@ -82,7 +100,11 @@ class Graph:
         Returns:
             list[int]: a list of neighbor nodes
         """
-        pass
+        neighborList = []
+        for i in self.nodes:
+            if i == node:
+                neighborList.append(node)
+        return neighborList
     
     def neighbors(self, node: int) -> list[int]:
         """returns neighbors in undirected graphs  
@@ -94,7 +116,11 @@ class Graph:
         Returns:
             list[int]: a list of neighbor nodes
         """
-        pass
+        neighborList = []
+        for i in self.nodes:
+            if i == node:
+                neighborList.append(node)
+        return neighborList
     
     def edge_cost(self, n1: int, n2: int) -> float:
         """returns the edge cost of a given pair of nodes
