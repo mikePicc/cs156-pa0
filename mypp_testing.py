@@ -12,7 +12,15 @@ def check_prime(num: int) -> bool:
     Returns:
         bool: True if the input number is a prime
     """
-    pass
+    try:
+       if num > 1:
+        for i in range (2, int(num / 2) + 1):
+            if num % i == 0:
+                return False
+            else:
+                return True
+    except TypeError and ValueError:
+        print(f'The number you entered is not either a integer nor a natural number')
 
 
 def divide(num: float, denom: float) -> float:
@@ -28,7 +36,11 @@ def divide(num: float, denom: float) -> float:
     Returns:
         float: the quotient
     """
-    pass
+    try:
+        return num / denom
+    except ValueError:
+        denom == 0.0
+        print(f'cannot divide by 0')
 
 
 
@@ -44,12 +56,18 @@ class Student:
         Raises:
             ValueError: if the input id is not 5 digit-length, raise a value error.
         """
-        pass
+        try:
+            self.first = first
+            self.last = last
+            self.id = id
+        except ValueError:
+            if len(self.id) != 5:
+                print(f'The ID number is not 5 digits in length')
 
     def fullname(self) -> str:
         """ returns a full name first_name(space)last_name
         """
-        pass
+        print(self.first, " ", self.last)
     
     def admission_yr(self) -> int:
         """returns the admission year (first two digits of the student ID)
@@ -58,4 +76,5 @@ class Student:
             int: two digits representing a year like 22
         """
         # Hint: Use a string slice in Python by converting the int student id to a string
-        pass
+        numString = str(self.id)
+        return int(numString[:2])
